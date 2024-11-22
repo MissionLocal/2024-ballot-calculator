@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         totalCostDisplay.innerHTML = `Total: <span style="font-weight: bold;">$${totalCost.toFixed(2)}</span>`;
 
-        pymChild.sendHeight();
+        // pymChild.sendHeight();
 
     }
 
