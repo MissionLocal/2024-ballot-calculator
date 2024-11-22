@@ -178,9 +178,7 @@ document.addEventListener("DOMContentLoaded", function() {
         radioButtons.forEach(radio => radio.checked = false);
     }
 
-    // Resize Pym.js on window resize
-    $(window).on('resize', function () {
-        pymChild.sendHeight();
-    });
+    // resize using pym
+    pymChild.sendHeight();
 
 });
