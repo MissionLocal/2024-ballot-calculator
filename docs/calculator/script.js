@@ -6,17 +6,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var ballotDropdown = document.getElementById("ballot-dropdown");
     var calculator = document.getElementById("calculatorBox");
     var totalCostDisplay = document.getElementById("calculatorBox"); 
-    var innerContainer = document.getElementById("inner-container");
     var steps = ["step-2", "step-3", "step-4", "step-5", "step-6", "step-7", "step-8", "step-9"];
     steps.forEach(step => document.getElementById(step).style.display = "none");
     calculator.style.display = "none";
-
-    // create a wrapper div for the calculator
-    var wrapper = document.createElement('div');
-    wrapper.id = 'calculator-wrapper';
-    wrapper.style.position = 'relative';
-    calculator.parentNode.insertBefore(wrapper, calculator);
-    wrapper.appendChild(calculator);
 
     // define costs
     var costs = [{'contest_type':'mayor','contest':'mayor','value':'LondonBreed','cost': 58.86},
@@ -96,29 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
     {'contest_type':'supe','contest':'D11','value':'MichaelLai','cost': 49.73},
     {'contest_type':'supe','contest':'D11','value':'RogerKMarenco','cost': 0},
     {'contest_type':'supe','contest':'D11','value':'JoseMorales','cost': 1.12},];
-    
-    // handle scroll positioning
-    function updateCalculatorPosition() {
-        var wrapperRect = wrapper.getBoundingClientRect();
-        var containerRect = innerContainer.getBoundingClientRect();
-        
-        if (wrapperRect.top < 5) {
-            calculator.style.position = 'fixed';
-            calculator.style.top = '5px';
-            calculator.style.left = `${containerRect.left + 15}px`;
-            calculator.style.right = 'auto';
-            calculator.style.margin = '0';
-        } else {
-            calculator.style.position = 'relative';
-            calculator.style.top = 'auto';
-            calculator.style.left = '0';
-            calculator.style.right = 'auto';
-            calculator.style.margin = '0';
-        }
-    }
 
-    // add scroll event listener
-    window.addEventListener('scroll', updateCalculatorPosition);
 
     // create the function for calculating the total cost
     function calculateTotalCost() {
@@ -223,9 +193,7 @@ document.addEventListener("DOMContentLoaded", function() {
         pymChild.sendHeight();
     }
 
-    // resize
     window.addEventListener("resize", () => {
-        updateCalculatorPosition();
         pymChild.sendHeight();
     });
 
