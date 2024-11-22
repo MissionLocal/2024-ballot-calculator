@@ -100,11 +100,6 @@ h3 {
   font-size: 20px;
 }
 
-.sticky-container {
-  height: 100vh;
-  overflow-y: scroll;
-}
-
 #calculatorBox {
   background-color: #ade8f4; 
   z-index: 1;
