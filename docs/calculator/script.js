@@ -110,7 +110,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var radioButtons = document.querySelectorAll("input[type=radio]");
     radioButtons.forEach(radio => {
         radio.addEventListener("change", calculateTotalCost);
+
         pymChild.sendHeight();
+        
     });
     
     // handling district changes
@@ -118,6 +120,8 @@ document.addEventListener("DOMContentLoaded", function() {
         var selectedDistrict = ballotDropdown.value;
         
         resetCalculator();
+
+        pymChild.sendHeight();
 
         steps.forEach(step => document.getElementById(step).style.display = "none");
         calculator.style.display = "none";
@@ -175,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         pymChild.sendHeight();
-        
+
     });
 
 
@@ -184,6 +188,8 @@ document.addEventListener("DOMContentLoaded", function() {
         totalCostDisplay.innerHTML = 'Total: <span style="font-weight: bold;">$0</span>';
         var radioButtons = document.querySelectorAll("input[type=radio]");
         radioButtons.forEach(radio => radio.checked = false);
+
+        pymChild.sendHeight();
     }
 
     window.addEventListener("resize", () => {
