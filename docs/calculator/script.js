@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
     radioButtons.forEach(radio => {
         radio.addEventListener("change", calculateTotalCost);
 
-        pymChild.sendHeight();
+        // pymChild.sendHeight();
         
     });
     
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         resetCalculator();
 
-        pymChild.sendHeight();
+        // pymChild.sendHeight();
 
         steps.forEach(step => document.getElementById(step).style.display = "none");
         calculator.style.display = "none";
