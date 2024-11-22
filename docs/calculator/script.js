@@ -101,12 +101,16 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
         totalCostDisplay.innerHTML = `Total: <span style="font-weight: bold;">$${totalCost.toFixed(2)}</span>`;
+
+        pymChild.sendHeight();
+
     }
 
     // event listener for radio buttons
     var radioButtons = document.querySelectorAll("input[type=radio]");
     radioButtons.forEach(radio => {
         radio.addEventListener("change", calculateTotalCost);
+        pymChild.sendHeight();
     });
     
     // handling district changes
@@ -169,7 +173,11 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("step-8").style.display = "block";
             document.getElementById("step-9").style.display = "block";
         }
+
+        pymChild.sendHeight();
+        
     });
+
 
     // reset calculator when select a different district 
     function resetCalculator() {
@@ -178,7 +186,8 @@ document.addEventListener("DOMContentLoaded", function() {
         radioButtons.forEach(radio => radio.checked = false);
     }
 
-    // resize using pym
-    pymChild.sendHeight();
+    window.addEventListener("resize", () => {
+        pymChild.sendHeight();
+    });
 
 });
