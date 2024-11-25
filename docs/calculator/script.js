@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function onScroll(parentInfo) {
         console.log(parentInfo); // would display for example: 874 776 1091 8 1673 866
-        const arr1 = parentInfo.split(' ').map(Number);
+        const arr1 = parentInfo.split(' ');
         console.log(arr1);
         const element = document.getElementById("calculatorBox");
 	element.style.position = "absolute";
