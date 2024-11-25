@@ -204,7 +204,12 @@ document.addEventListener("DOMContentLoaded", function() {
     pymChild.onMessage('viewport-iframe-position', onScroll);
 
     function onScroll(parentInfo) {
-        console.log(parentInfo) // would display for example: 874 776 1091 8 1673 866
+        console.log(parentInfo); // would display for example: 874 776 1091 8 1673 866
+        const arr1 = parentInfo.split(' ').map(Number);
+        console.log(arr1);
+        const element = document.getElementById("calculatorBox");
+	element.style.position = "absolute";
+        element.style.top = arr1[2];
     }
 
 });
