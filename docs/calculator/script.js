@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     // create the iframe
-    var pymChild = new pym.Child({ polling: 500 });
+    var pymChild = new pym.Child();
 
     // set variables
     var ballotDropdown = document.getElementById("ballot-dropdown");
@@ -9,6 +9,15 @@ document.addEventListener("DOMContentLoaded", function() {
     var steps = ["step-2", "step-3", "step-4", "step-5", "step-6", "step-7", "step-8", "step-9"];
     steps.forEach(step => document.getElementById(step).style.display = "none");
     calculator.style.display = "none";
+
+
+    // declare iframe and viewport variables
+    let viewportWidth = window.innerWidth;
+    let iframeLeft = 0;
+    let iframeRight = viewportWidth;
+    let iframeBottom = window.innerHeight; // assuming iframe is occupying full viewport height
+    let iframeTop = 0;
+ 
 
     // define costs
     var costs = [{'contest_type':'mayor','contest':'mayor','value':'LondonBreed','cost': 58.86},
@@ -107,6 +116,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
 
+    // function to reset position of calculator box
+    function resetCalculatorPosition() {
+        var boxRect = calculator.getBoundingClientRect();
+
+        // Check if the calculator box is outside the viewport
+        if (boxRect.top < iframeTop) {
+            // Move it back to the top
+            calculator.style.position = "absolute";
+            calculator.style.top = "0px";  // Reset position to top of the iframe
+        }
+
+        pymChild.sendHeight();
+    }
+
+
     // event listener for radio buttons
     var radioButtons = document.querySelectorAll("input[type=radio]");
     radioButtons.forEach(radio => {
@@ -196,5 +220,9 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener("resize", () => {
         pymChild.sendHeight();
     });
+
+    // Call resetCalculatorPosition on scroll or resize
+    window.addEventListener("scroll", resetCalculatorPosition);
+    window.addEventListener("resize", resetCalculatorPosition);
 
 });
