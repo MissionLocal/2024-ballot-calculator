@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function() {
     radioButtons.forEach(radio => {
         radio.addEventListener("change", calculateTotalCost);
 
-        // comment out -- pymChild.sendHeight();
+        pymChild.sendHeight();
         
     });
     
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         resetCalculator();
 
-        // comment out -- pymChild.sendHeight();
+        pymChild.sendHeight();
 
         steps.forEach(step => document.getElementById(step).style.display = "none");
         calculator.style.display = "none";
@@ -195,24 +195,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         pymChild.sendHeight();
     }
-
-    // Check if #calculatorBox is out of view and reset position if necessary
-    function checkCalculatorPosition() {
-        var rect = calculator.getBoundingClientRect();
-        // Check if the blue box has gone out of view (i.e., its top is above the iframe)
-        if (rect.top < 0) {
-            // If the box is out of view, reset its position to the top of the iframe
-            calculator.style.position = 'absolute';
-            calculator.style.top = '0px';  // Reset to the top of the iframe
-        } else {
-            // If it's within view, set it back to sticky
-            calculator.style.position = 'sticky';
-            calculator.style.top = '5px'; // Sticky top
-        }
-    }
-
-    // listen for scroll events to check position
-    window.addEventListener("scroll", checkCalculatorPosition);
 
 
     window.addEventListener("resize", () => {
