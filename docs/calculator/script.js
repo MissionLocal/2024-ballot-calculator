@@ -217,10 +217,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.addEventListener("resize", () => {
         pymChild.sendHeight();
-        checkCalculatorPosition(); 
     });
-
-    // Initial check on page load
-    checkCalculatorPosition();
 
 });
