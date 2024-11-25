@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var steps = ["step-2", "step-3", "step-4", "step-5", "step-6", "step-7", "step-8", "step-9"];
     steps.forEach(step => document.getElementById(step).style.display = "none");
     calculator.style.display = "none";
+    var calculatorStartTop = 0;
+    var bannerHeight = 141;
+
  
 
     // define costs
@@ -182,6 +185,10 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("step-9").style.display = "block";
         }
 
+        if (calculator.style.position == "static") {
+            calculatorStartTop = parseFloat(calculator.offsetTop);
+        }
+
         pymChild.sendHeight();
 
     });
@@ -204,13 +211,20 @@ document.addEventListener("DOMContentLoaded", function() {
     pymChild.onMessage('viewport-iframe-position', onScroll);
 
     function onScroll(parentInfo) {
-        console.log(parentInfo); // would display for example: 874 776 1091 8 1673 866
         const arr1 = parentInfo.split(' ').map(Number);
-        console.log(arr1);
-        const element = document.getElementById("calculatorBox");
-	element.style.position = "absolute";
-        const invert = -1 * arr1[2];
-        element.style.top = str(invert);
+        const parentTop = arr1[2];
+        if (parentTop + calculatorStartTop < bannerHeight) {
+            calculator.style.position = "absolute";
+            calculator.style.top = bannerHeight - parentTop + "px";
+        } else {
+            calculator.style.position = "static";
+        }
+    }
+
+    pymChild.onMessage('data', onData);
+
+    function onData(parentInfo) {
+        bannerHeight = Number(parentInfo);
     }
 
 });
